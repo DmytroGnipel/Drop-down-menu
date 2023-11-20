@@ -17,7 +17,10 @@ function myMenu (menuObject, numElemMenu, submenuObject, numElemSubMenu) {
     addDropdownToMenuElement(numElemMenu, menuObject)
     addSubmenuToDropElement(numElemSubMenu, submenuObject)
 }
+
+//examples of using
 myMenu(headsAndLinks, 3, subHeadsAndLinks, 4)
+myMenu(headsAndLinks, 1, subHeadsAndLinks, 2)
 
 //DropMenu appears when cursor is over element 
 function mouseover (element, dropMenu) {
@@ -36,7 +39,6 @@ function mouseout (element, dropMenu) {
 and given direction of menu movement (down, right or left) */
 function createDropMenu (object, direction) {
     const dropMenu = document.createElement('div')
-    console.log(direction)
     if (direction === 'down') dropMenu.classList.add('dropDown')
     else if ((direction === 'right')) dropMenu.classList.add('dropRight')
     else if ((direction === 'left')) dropMenu.classList.add('dropLeft')
@@ -69,7 +71,6 @@ function addDropdownToMenuElement (elementNumber, dropDownObject) {
 function createSubMenu (objectForSubMenu) {
     const dropElements = document.getElementsByClassName('dropelement')
     let submenu
-    console.log(dropElements[0].dataset.id)
     if (dropElements[0].dataset.id < 2) {
         submenu = createDropMenu(objectForSubMenu, 'right')
     }//if 0th and 1th menu element, then submenu move right
@@ -83,7 +84,8 @@ function createSubMenu (objectForSubMenu) {
 //with given number of dropmenu element and given object (pair {texcontent: link} of the <a> element)
 function addSubmenuToDropElement (dropElementNumber, submenuObject) {
     const dropElement = document.querySelectorAll('.dropelement')[dropElementNumber]
-    const submenu = createSubMenu(submenuObject, 3)
+    dropElement.querySelector('a').textContent += ' >>'
+    const submenu = createSubMenu(submenuObject)
     mouseover(dropElement, submenu)
     mouseout(dropElement, submenu)
     dropElement.append(submenu)
